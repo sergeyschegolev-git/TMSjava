@@ -3,8 +3,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class HomeWork {
-    private final static int RANDOM_BOUND = 100;
-    private final static Random RANDOM = new Random();
+    private static int getRandomInteger(int bound) {
+        Random RANDOM = new Random();
+        return RANDOM.nextInt(bound);
+    }
 
     public static void main(String[] args) {
         printArray();
@@ -33,7 +35,7 @@ public class HomeWork {
         int[] array = new int[userNumber];
 
         for (int i = 0, len = array.length; i < len; i++) {
-            array[i] = RANDOM.nextInt(RANDOM_BOUND);
+            array[i] = getRandomInteger(50);
         }
 
         System.out.println(Arrays.toString(array));
@@ -84,7 +86,7 @@ public class HomeWork {
         int lastDigit = count % 10;
         String endOfWord = "ов";
 
-        if (lastDigit == 1) {
+        if (lastDigit == 1 && count != 11) {
             endOfWord = "";
         } else if (lastDigit > 1 && lastDigit < 5) {
             endOfWord = "а";
@@ -117,9 +119,9 @@ public class HomeWork {
      */
     public static void calculateSumOfDiagonalElements() {
         int[][] doubleArray = {
-                {RANDOM.nextInt(RANDOM_BOUND), RANDOM.nextInt(RANDOM_BOUND), RANDOM.nextInt(RANDOM_BOUND)},
-                {RANDOM.nextInt(RANDOM_BOUND), RANDOM.nextInt(RANDOM_BOUND), RANDOM.nextInt(RANDOM_BOUND)},
-                {RANDOM.nextInt(RANDOM_BOUND), RANDOM.nextInt(RANDOM_BOUND), RANDOM.nextInt(RANDOM_BOUND)},
+                {getRandomInteger(100), getRandomInteger(100), getRandomInteger(100)},
+                {getRandomInteger(100), getRandomInteger(100), getRandomInteger(100)},
+                {getRandomInteger(100), getRandomInteger(100), getRandomInteger(100)},
         };
         int sum = 0;
 
@@ -162,7 +164,7 @@ public class HomeWork {
 
         for (int[] innerArray : array) {
             for (int j = 0; j < innerArray.length; j++) {
-                innerArray[j] = RANDOM.nextInt(RANDOM_BOUND);
+                innerArray[j] = getRandomInteger(100);
             }
         }
 
@@ -188,7 +190,7 @@ public class HomeWork {
      * что такое просто число (https://www.webmath.ru/poleznoe/formules_18_5.php)
      */
     public static void printPrimeNumbers() {
-        for (int i = 1; i < 1000; i++) {
+        for (int i = 2; i < 1000; i++) {
             boolean isPrime = true;
 
             for (int j = 2; j <= (int) Math.sqrt(i) + 1; j++) {
