@@ -86,7 +86,7 @@ public class HomeWork {
         int lastDigit = count % 10;
         String endOfWord = "ов";
 
-        if (lastDigit == 1 && count != 11) {
+        if (count == 1) {
             endOfWord = "";
         } else if (lastDigit > 1 && lastDigit < 5) {
             endOfWord = "а";
@@ -190,10 +190,10 @@ public class HomeWork {
      * что такое просто число (https://www.webmath.ru/poleznoe/formules_18_5.php)
      */
     public static void printPrimeNumbers() {
-        for (int i = 2; i < 1000; i++) {
-            boolean isPrime = true;
+        for (int i = 1; i < 1000; i++) {
+            boolean isPrime = i != 1;
 
-            for (int j = 2; j <= (int) Math.sqrt(i) + 1; j++) {
+            for (int j = 2; j <= (int) Math.sqrt(i); j++) {
                 if (i % j == 0) {
                     isPrime = false;
                     break;
