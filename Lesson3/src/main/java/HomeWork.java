@@ -84,9 +84,12 @@ public class HomeWork {
      */
     public static void countDevs(int count) {
         int lastDigit = count % 10;
+        int lastTwoDigits = count % 100;
         String endOfWord = "ов";
 
-        if (count == 1) {
+        if (lastTwoDigits == 11) {
+            endOfWord = "ов";
+        } else if (lastDigit == 1) {
             endOfWord = "";
         } else if (lastDigit > 1 && lastDigit < 5) {
             endOfWord = "а";
