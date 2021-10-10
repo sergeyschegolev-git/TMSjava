@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Homework {
     public static void main(String[] args) {
-        System.out.println(getAmebas());
+        System.out.println(getAmebas(9));
         multiple(2, 3);
         printConvertedMatrix();
         printArrayOfOdds();
@@ -16,8 +16,15 @@ public class Homework {
         rearrangeMatrix();
     }
 
-    public static int getAmebas() {
-        return (int) Math.pow(2, 24 / 3);
+    public static int getAmebas(int hours) {
+        int amebas = 1;
+        int divideHour = 3;
+
+        for (int i = divideHour; i <= hours; i += divideHour) {
+            amebas = amebas * 2;
+        }
+
+        return amebas;
     }
 
     public static int multiple(int a, int b) {
@@ -35,7 +42,7 @@ public class Homework {
             result += a;
         }
 
-        return isPositive ? result : -1 * result;
+        return isPositive ? result : -result;
     }
 
     public static String getLine(int starsQuantity, int spacesQuantity) {
