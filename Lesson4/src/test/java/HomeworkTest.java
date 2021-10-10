@@ -9,12 +9,15 @@ class HomeWorkTest {
         assertEquals(-81, Homework.multiple(-9, 9));
         assertEquals(81, Homework.multiple(-9, -9));
         assertEquals(0, Homework.multiple(2, 0));
+        assertEquals(0, Homework.multiple(0, 2));
+        assertEquals(-3, Homework.multiple(3, -1));
+        assertEquals(-3, Homework.multiple(-1, 3));
     }
 
     @org.junit.jupiter.api.Test
     void findDoubles() {
         assertEquals("There is no duplicates", Homework.findDoubles(new int[]{1, 2, 3}));
-        assertEquals("There are following duplicates 2, 3", Homework.findDoubles(new int[]{2, 2, 3, 3, 4, 5}));
+        assertEquals("There are following duplicates 2, 3", Homework.findDoubles(new int[]{2, 2, 2, 3, 3, 4, 5}));
     }
 
     @org.junit.jupiter.api.Test

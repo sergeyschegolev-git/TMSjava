@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -6,7 +7,7 @@ public class Homework {
     public static void main(String[] args) {
         System.out.println(getAmebas());
         multiple(2, 3);
-        printMConvertedMatrix();
+        printConvertedMatrix();
         printArrayOfOdds();
         printMaxItemInArray();
         printArrayOfRandoms();
@@ -16,14 +17,17 @@ public class Homework {
     }
 
     public static int getAmebas() {
-        return (int) Math.pow(2, 24/3);
+        return (int) Math.pow(2, 24 / 3);
     }
 
     public static int multiple(int a, int b) {
-        if (a < 0 && b < 0) {
-            a = Math.abs(a);
-            b = Math.abs(b);
+        if (a == 0 || b == 0) {
+            return 0;
         }
+
+        boolean isPositive = (a < 0 && b < 0) || (a > 0 && b > 0);
+        a = Math.abs(a);
+        b = Math.abs(b);
 
         int result = 0;
 
@@ -31,7 +35,7 @@ public class Homework {
             result += a;
         }
 
-        return result;
+        return isPositive ? result : -1 * result;
     }
 
     public static String getLine(int starsQuantity, int spacesQuantity) {
@@ -47,7 +51,7 @@ public class Homework {
         return spaces + stars;
     }
 
-    public static void printMConvertedMatrix() {
+    public static void printConvertedMatrix() {
         int[][] array = new int[4][4];
 
         for (int i = 1; i <= array.length; i++) {
@@ -72,7 +76,7 @@ public class Homework {
         int userNumber = scanner.nextInt();
 
         if (userNumber == 0) {
-            return;
+            System.out.println("0 - не положительное и не отрицательное число");
         }
 
         int number = userNumber;
@@ -159,25 +163,23 @@ public class Homework {
     }
 
     public static String findDoubles(int[] array) {
-        String duplicates = "";
+        HashSet<Integer> duplicates = new HashSet<>();
 
         for (int i = 0; i < array.length; i++) {
             for (int j = i + 1; j < array.length; j++) {
                 if (array[i] == array[j]) {
-                    if (duplicates.length() == 0) {
-                        duplicates += array[i];
-                    } else {
-                        duplicates += ", " + array[i];
-                    }
+                    duplicates.add(array[i]);
                 }
             }
         }
 
-        if (duplicates.length() == 0) {
+        if (duplicates.size() == 0) {
             return "There is no duplicates";
         }
 
-        return "There are following duplicates " + duplicates;
+        String duplicatedString = duplicates.toString();
+
+        return "There are following duplicates " + duplicatedString.substring(1, duplicatedString.length() - 1);
     }
 
     public static void printMatrix(int[][] array) {
