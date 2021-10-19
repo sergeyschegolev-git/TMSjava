@@ -7,7 +7,7 @@ import java.util.List;
 
 @AllArgsConstructor
 public class MilitaryOffice {
-    RecruitRegistry recruitRegistry;
+    private RecruitRegistry recruitRegistry;
 
     public List<Recruit> getRecruitsWithSpecificName(String name) {
         List<Recruit> recruits = getPossibleRecruits();
@@ -18,7 +18,6 @@ public class MilitaryOffice {
                 result.add(recruit);
             }
         }
-
         return result;
     }
 
@@ -31,7 +30,6 @@ public class MilitaryOffice {
                 result.add(recruit);
             }
         }
-
         return result;
     }
 
@@ -46,7 +44,6 @@ public class MilitaryOffice {
                 result.add(recruit);
             }
         }
-
         return result;
     }
 
@@ -57,11 +54,10 @@ public class MilitaryOffice {
         for(Recruit recruit: recruits) {
             int age = recruit.getAge();
 
-            if (age > from && age < to) {
+            if (age >= from && age < to) {
                 result.add(recruit);
             }
         }
-
         return result;
     }
 }
