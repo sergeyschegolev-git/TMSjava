@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class PetrolBank {
     private final int fullBank;
-    private int currentPetrolQuantity = 0;
+    private int currentPetrolQuantity;
 
     public PetrolBank(int fullBank) {
         this.fullBank = fullBank;

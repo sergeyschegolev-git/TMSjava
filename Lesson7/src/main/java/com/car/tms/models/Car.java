@@ -9,11 +9,9 @@ import lombok.Setter;
 public class Car {
     private String mark;
     private int manufactureYear;
-    private int kilometrage = 0;
-    private PetrolBank petrolBank;
-
-    @Setter(value = AccessLevel.NONE)
-    private Engine engine;
+    private int kilometrage;
+    private final PetrolBank petrolBank;
+    private final Engine engine;
 
     public Car(Engine engine, PetrolBank petrolBank) {
         this.engine = engine;

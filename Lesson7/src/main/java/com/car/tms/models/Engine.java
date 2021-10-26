@@ -7,8 +7,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Engine {
-    private String type;
-    private boolean isCharged = false;
+    private final String type;
+    private boolean isCharged;
 
     public Engine(String type) {
         this.type = type;
