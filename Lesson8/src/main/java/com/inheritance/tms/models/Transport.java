@@ -8,12 +8,22 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 public class Transport {
-    private int CV;
+    private double power;
     private int maxSpeed;
     private int weight;
     private String mark;
 
-    protected double getCapacity() {
-        return CV * 0.74;
+    private double getCapacity() {
+        return power * 0.74;
+    }
+
+    @Override
+    public String toString() {
+        return "Transport{" +
+                "capacity=" + getCapacity() +
+                ", maxSpeed=" + maxSpeed +
+                ", weight=" + weight +
+                ", mark='" + mark + '\'' +
+                '}';
     }
 }
