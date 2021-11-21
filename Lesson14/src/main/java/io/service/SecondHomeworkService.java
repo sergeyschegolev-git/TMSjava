@@ -1,50 +1,42 @@
 package io.service;
 
+import io.utils.FileUtils;
 import io.utils.TextUtils;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.BreakIterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SecondHomeworkService implements Runable {
+    private final String PATH = "Lesson14/src/main/resources/homework2";
+
     @Override
     public void run() throws IOException {
-        String PATH = "Lesson14/src/main/resources/homework2";
-        try (FileReader reader = new FileReader(PATH + "/input.txt");
-             BufferedReader bufferedReader = new BufferedReader((reader));
-             FileWriter writer = new FileWriter(PATH + "/output.txt")) {
-            StringBuilder stringBuilder = convertTextFromFileIntoString(bufferedReader);
-            writeSentencesIntoFile(writer, stringBuilder);
+        try (BufferedReader bufferedReader = FileUtils.getBufferedReaderForCustomPath(PATH + "/input.txt")) {
+            List<String> lines = FileUtils.getLines(bufferedReader);
+            lines = removeEmptyLines(lines);
+            writeSentencesIntoFile(TextUtils.convertListToString(lines, ""));
         }
     }
 
-    private StringBuilder convertTextFromFileIntoString(BufferedReader bufferedReader) throws IOException {
-        String line;
-        StringBuilder stringBuilder = new StringBuilder();
-        while ((line = bufferedReader.readLine()) != null) {
-            if (TextUtils.isAnySymbolsInLine(line)) {
-                stringBuilder.append(line);
-            }
-        }
-
-        return stringBuilder;
+    private List<String> removeEmptyLines(List<String> lines) {
+        return lines.stream().filter(TextUtils::isAnySymbolsInLine).collect(Collectors.toList());
     }
 
-    private void writeSentencesIntoFile(FileWriter writer, StringBuilder stringBuilder) throws IOException {
+    private void writeSentencesIntoFile(String string) throws IOException {
         BreakIterator bi = BreakIterator.getSentenceInstance();
-        bi.setText(stringBuilder.toString());
+        bi.setText(string);
         int index = 0;
         while (bi.next() != BreakIterator.DONE) {
-            String sentence = stringBuilder.substring(index, bi.current());
+            String sentence = string.substring(index, bi.current());
 
-            boolean isPossibleToAppend = TextUtils.hasPalindromeInString(sentence)
-                    || TextUtils.isSentenceConsistWordsQuantity(3, 5, sentence);
+            boolean isPossibleToAppend = TextUtils.isSentenceConsistWordsQuantity(3, 5, sentence)
+                    || TextUtils.hasPalindromeInString(sentence);
 
             if (isPossibleToAppend) {
-                writer.append(sentence);
-                writer.append('\n');
+                FileUtils.writeToFile(PATH + "/output.txt", sentence + '\n');
             }
             index = bi.current();
         }
