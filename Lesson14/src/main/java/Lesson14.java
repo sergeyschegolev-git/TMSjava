@@ -8,13 +8,24 @@ public class Lesson14 {
         Runable secondHomeworkService = new SecondHomeworkService();
         Runable thirdHomeworkService = new ThirdHomeworkService();
         Runable fourthHomeworkService = new FourthHomeworkService();
+        Runable fifthHomeworkService = new FifthHomeworkService();
 
-        Runable[] tasks = {firstHomeworkService, secondHomeworkService, thirdHomeworkService, fourthHomeworkService};
+        Runable[] tasks = {
+            firstHomeworkService,
+            secondHomeworkService,
+            thirdHomeworkService,
+            fourthHomeworkService,
+            fifthHomeworkService
+        };
 
+        for (Runable task : tasks) {
+            runTask(task);
+        }
+    }
+
+    private static void runTask(Runable task) {
         try {
-            for (Runable task : tasks) {
-                task.run();
-            }
+            task.run();
         } catch (IOException e) {
             System.out.println(e);
         }

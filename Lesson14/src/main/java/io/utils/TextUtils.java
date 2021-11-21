@@ -1,5 +1,7 @@
 package io.utils;
 
+import java.util.List;
+
 public final class TextUtils {
     private TextUtils() {
 
@@ -48,5 +50,9 @@ public final class TextUtils {
 
     public static boolean isTextContainWord(String text, String word) {
         return text.contains(word);
+    }
+
+    public static String convertListToString(List<String> list, String delimiter) {
+        return String.join(delimiter, list);
     }
 }
